@@ -109,12 +109,14 @@ BEGIN
     NEW.id,
     NEW.email,
     COALESCE(NEW.raw_user_meta_data->>'full_name', ''),
-    COALESCE(NEW.raw_user_meta_data->>'role', 'customer')
+    'customer'
   )
   ON CONFLICT (id) DO NOTHING;
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
+
+ALTER FUNCTION public.handle_new_user() SET search_path = public;
 
 DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
 CREATE TRIGGER on_auth_user_created
@@ -145,6 +147,8 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER STABLE;
 
+ALTER FUNCTION public.is_admin() SET search_path = public;
+
 -- Profiles Policies
 CREATE POLICY "Public profiles can be viewed by owner or admin"
   ON public.profiles FOR SELECT
@@ -153,6 +157,9 @@ CREATE POLICY "Public profiles can be viewed by owner or admin"
 CREATE POLICY "Users can update their own profile"
   ON public.profiles FOR UPDATE
   USING (auth.uid() = id);
+
+REVOKE UPDATE ON TABLE public.profiles FROM authenticated;
+GRANT UPDATE (full_name, shipping_address, updated_at) ON TABLE public.profiles TO authenticated;
 
 -- Categories Policies
 CREATE POLICY "Categories are readable by everyone"
@@ -186,10 +193,6 @@ CREATE POLICY "Users can view their own orders"
   ON public.orders FOR SELECT
   USING (auth.uid() = user_id OR public.is_admin());
 
-CREATE POLICY "Users or checkout route can insert orders"
-  ON public.orders FOR INSERT
-  WITH CHECK (auth.uid() = user_id OR user_id IS NULL OR public.is_admin());
-
 CREATE POLICY "Admins can update orders"
   ON public.orders FOR UPDATE
   USING (public.is_admin());
@@ -204,10 +207,6 @@ CREATE POLICY "Users can view their own order items"
         AND (orders.user_id = auth.uid() OR public.is_admin())
     )
   );
-
-CREATE POLICY "Checkout route can insert order items"
-  ON public.order_items FOR INSERT
-  WITH CHECK (true);
 
 -- Wishlist Policies
 CREATE POLICY "Users have full control over their own wishlist"

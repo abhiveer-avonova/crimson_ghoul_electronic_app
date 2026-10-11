@@ -80,13 +80,18 @@ export default function AdminOrdersPage() {
   const handleStatusChange = async (orderId: string, newStatus: string) => {
     setUpdatingId(orderId);
     try {
-      await supabase
+      const { error } = await supabase
         .from('orders')
         .update({
           status: newStatus,
           updated_at: new Date().toISOString(),
         })
-        .eq('id', orderId);
+        .eq('id', orderId)
+        .select();
+
+      if (error) {
+        throw new Error(error.message);
+      }
 
       setOrders((prev) =>
         prev.map((o) => (o.id === orderId ? { ...o, status: newStatus } : o))

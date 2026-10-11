@@ -44,7 +44,20 @@ export default function AdminProductsPage() {
     }
 
     try {
-      await supabase.from('products').delete().eq('id', id);
+      const { data, error } = await supabase
+        .from('products')
+        .update({ is_active: false })
+        .eq('id', id)
+        .select('id');
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      if (!data || data.length === 0) {
+        throw new Error('Product deactivation failed: no rows were affected.');
+      }
+
       setProducts((prev) => prev.filter((p) => p.id !== id));
     } catch (err) {
       console.error('Delete product error:', err);

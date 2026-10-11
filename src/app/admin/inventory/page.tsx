@@ -22,6 +22,7 @@ interface InventoryItemWithProduct {
 export default function AdminInventoryPage() {
   const [inventoryList, setInventoryList] = useState<InventoryItemWithProduct[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
   const [updatingId, setUpdatingId] = useState<string | null>(null);
 
   const supabase = createClient();
@@ -34,10 +35,19 @@ export default function AdminInventoryPage() {
           .select('*, product:products(name, slug, brand, price)')
           .order('stock_quantity', { ascending: true });
 
-        if (!error && data && data.length > 0) {
+        if (error) {
+          setError(error.message);
+          setInventoryList([]);
+          return;
+        }
+
+        if (data && data.length > 0) {
           setInventoryList(data);
-        } else {
-          // Fallback to seed products inventory
+          setError(null);
+          return;
+        }
+
+        if (process.env.NODE_ENV === 'development') {
           const seedInv = SEED_PRODUCTS.map((p) => ({
             product_id: p.id,
             sku: p.inventory?.sku || 'SKU-DEFAULT',
@@ -51,9 +61,16 @@ export default function AdminInventoryPage() {
             },
           }));
           setInventoryList(seedInv);
+          setError(null);
+          return;
         }
+
+        setInventoryList([]);
+        setError('No inventory records found.');
       } catch (err) {
         console.error('Failed to load inventory:', err);
+        setInventoryList([]);
+        setError(err instanceof Error ? err.message : 'Failed to load inventory.');
       } finally {
         setLoading(false);
       }
@@ -67,13 +84,22 @@ export default function AdminInventoryPage() {
     setUpdatingId(productId);
 
     try {
-      await supabase
+      const { data, error } = await supabase
         .from('inventory')
         .update({
           stock_quantity: safeStock,
           updated_at: new Date().toISOString(),
         })
-        .eq('product_id', productId);
+        .eq('product_id', productId)
+        .select('product_id');
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      if (!data || data.length === 0) {
+        throw new Error('Inventory update failed: no rows were affected.');
+      }
 
       setInventoryList((prev) =>
         prev.map((item) =>
@@ -91,6 +117,14 @@ export default function AdminInventoryPage() {
     return (
       <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-8 text-center text-slate-400 font-mono text-xs">
         Auditing hardware stock reserves...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-2xl border border-rose-500/40 bg-rose-950/20 p-8 text-center text-rose-200 font-mono text-xs">
+        Inventory loading failed: {error}
       </div>
     );
   }
