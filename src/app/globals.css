@@ -1,0 +1,33 @@
+@import "tailwindcss";
+@config "../../tailwind.config.ts";
+
+:root {
+  --bg-app: #0b0f17;
+  --bg-card: #111827;
+  --bg-card-hover: #1e293b;
+  --border-subtle: #1f293d;
+  --border-focus: #e11d48;
+  --crimson-primary: #e11d48;
+  --crimson-hover: #be123c;
+  --crimson-glow: rgba(225, 29, 72, 0.35);
+  --ruby-accent: #f43f5e;
+  --cyber-cyan: #06b6d4;
+  --emerald-stock: #10b981;
+
+  --background: #0b0f17;
+  --foreground: #f8fafc;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
