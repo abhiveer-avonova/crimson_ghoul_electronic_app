@@ -1,0 +1,170 @@
+{
+  "hero_gaming_pc": {
+    "id": "hero_gaming_pc",
+    "publicId": "crimson_ghoul_store/hero_gaming_pc",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791699187/crimson_ghoul_store/hero_gaming_pc.jpg",
+    "width": 1376,
+    "height": 768,
+    "format": "jpg"
+  },
+  "hero_creator_laptop": {
+    "id": "hero_creator_laptop",
+    "publicId": "crimson_ghoul_store/hero_creator_laptop",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791699188/crimson_ghoul_store/hero_creator_laptop.jpg",
+    "width": 1376,
+    "height": 768,
+    "format": "jpg"
+  },
+  "hero_smartphone_ecosystem": {
+    "id": "hero_smartphone_ecosystem",
+    "publicId": "crimson_ghoul_store/hero_smartphone_ecosystem",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791699188/crimson_ghoul_store/hero_smartphone_ecosystem.jpg",
+    "width": 1376,
+    "height": 768,
+    "format": "jpg"
+  },
+  "hero_flash_sale_bg": {
+    "id": "hero_flash_sale_bg",
+    "publicId": "crimson_ghoul_store/hero_flash_sale_bg",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791699189/crimson_ghoul_store/hero_flash_sale_bg.jpg",
+    "width": 1376,
+    "height": 768,
+    "format": "jpg"
+  },
+  "category_desktop_pc": {
+    "id": "category_desktop_pc",
+    "publicId": "crimson_ghoul_store/category_desktop_pc",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791699703/crimson_ghoul_store/category_desktop_pc.jpg",
+    "width": 1024,
+    "height": 1024,
+    "format": "jpg"
+  },
+  "category_laptops": {
+    "id": "category_laptops",
+    "publicId": "crimson_ghoul_store/category_laptops",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791699704/crimson_ghoul_store/category_laptops.jpg",
+    "width": 1024,
+    "height": 1024,
+    "format": "jpg"
+  },
+  "category_smartphones": {
+    "id": "category_smartphones",
+    "publicId": "crimson_ghoul_store/category_smartphones",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791699704/crimson_ghoul_store/category_smartphones.jpg",
+    "width": 1024,
+    "height": 1024,
+    "format": "jpg"
+  },
+  "category_peripherals": {
+    "id": "category_peripherals",
+    "publicId": "crimson_ghoul_store/category_peripherals",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791699705/crimson_ghoul_store/category_peripherals.jpg",
+    "width": 1024,
+    "height": 1024,
+    "format": "jpg"
+  },
+  "category_audio": {
+    "id": "category_audio",
+    "publicId": "crimson_ghoul_store/category_audio",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791699705/crimson_ghoul_store/category_audio.jpg",
+    "width": 1024,
+    "height": 1024,
+    "format": "jpg"
+  },
+  "category_components": {
+    "id": "category_components",
+    "publicId": "crimson_ghoul_store/category_components",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791699706/crimson_ghoul_store/category_components.jpg",
+    "width": 1024,
+    "height": 1024,
+    "format": "jpg"
+  },
+  "pdp_laptop_front": {
+    "id": "pdp_laptop_front",
+    "publicId": "crimson_ghoul_store/pdp_laptop_front",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791700059/crimson_ghoul_store/pdp_laptop_front.jpg",
+    "width": 1024,
+    "height": 1024,
+    "format": "jpg"
+  },
+  "pdp_laptop_side": {
+    "id": "pdp_laptop_side",
+    "publicId": "crimson_ghoul_store/pdp_laptop_side",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791700060/crimson_ghoul_store/pdp_laptop_side.jpg",
+    "width": 1024,
+    "height": 1024,
+    "format": "jpg"
+  },
+  "pdp_phone_showcase": {
+    "id": "pdp_phone_showcase",
+    "publicId": "crimson_ghoul_store/pdp_phone_showcase",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791700060/crimson_ghoul_store/pdp_phone_showcase.jpg",
+    "width": 1024,
+    "height": 1024,
+    "format": "jpg"
+  },
+  "pdp_mouse": {
+    "id": "pdp_mouse",
+    "publicId": "crimson_ghoul_store/pdp_mouse",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791700061/crimson_ghoul_store/pdp_mouse.jpg",
+    "width": 1024,
+    "height": 1024,
+    "format": "jpg"
+  },
+  "pdp_monitor": {
+    "id": "pdp_monitor",
+    "publicId": "crimson_ghoul_store/pdp_monitor",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791700061/crimson_ghoul_store/pdp_monitor.jpg",
+    "width": 1024,
+    "height": 1024,
+    "format": "jpg"
+  },
+  "lifestyle_developer_setup": {
+    "id": "lifestyle_developer_setup",
+    "publicId": "crimson_ghoul_store/lifestyle_developer_setup",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791700225/crimson_ghoul_store/lifestyle_developer_setup.jpg",
+    "width": 1376,
+    "height": 768,
+    "format": "jpg"
+  },
+  "lifestyle_esports_setup": {
+    "id": "lifestyle_esports_setup",
+    "publicId": "crimson_ghoul_store/lifestyle_esports_setup",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791700226/crimson_ghoul_store/lifestyle_esports_setup.jpg",
+    "width": 1376,
+    "height": 768,
+    "format": "jpg"
+  },
+  "empty_cart": {
+    "id": "empty_cart",
+    "publicId": "crimson_ghoul_store/empty_cart",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791700526/crimson_ghoul_store/empty_cart.jpg",
+    "width": 1024,
+    "height": 1024,
+    "format": "jpg"
+  },
+  "empty_wishlist": {
+    "id": "empty_wishlist",
+    "publicId": "crimson_ghoul_store/empty_wishlist",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791700527/crimson_ghoul_store/empty_wishlist.jpg",
+    "width": 1024,
+    "height": 1024,
+    "format": "jpg"
+  },
+  "empty_404": {
+    "id": "empty_404",
+    "publicId": "crimson_ghoul_store/empty_404",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791700527/crimson_ghoul_store/empty_404.jpg",
+    "width": 1024,
+    "height": 1024,
+    "format": "jpg"
+  },
+  "design_system_master": {
+    "id": "design_system_master",
+    "publicId": "crimson_ghoul_store/design_system_master",
+    "url": "https://res.cloudinary.com/ywi16g0m/image/upload/v1791701474/crimson_ghoul_store/design_system_master.jpg",
+    "width": 1376,
+    "height": 768,
+    "format": "jpg"
+  }
+}
