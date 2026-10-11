@@ -98,6 +98,12 @@ export default function ProfilePage() {
     );
   }
 
+  const isAdmin =
+    profile?.role === 'admin' ||
+    user?.email === 'admin@crimsonghoul.io' ||
+    user?.app_metadata?.role === 'admin' ||
+    user?.user_metadata?.role === 'admin';
+
   return (
     <div className="space-y-6">
       {/* Header card */}
@@ -105,8 +111,8 @@ export default function ProfilePage() {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <h1 className="text-xl font-bold text-white">Operative Identification</h1>
-            <Badge variant={profile?.role === 'admin' ? 'featured' : 'spec'}>
-              {profile?.role === 'admin' ? 'ADMINISTRATOR' : 'CUSTOMER'}
+            <Badge variant={isAdmin ? 'featured' : 'spec'}>
+              {isAdmin ? 'ADMINISTRATOR' : 'CUSTOMER'}
             </Badge>
           </div>
           <p className="text-xs font-mono text-slate-400">
@@ -114,7 +120,7 @@ export default function ProfilePage() {
           </p>
         </div>
 
-        {profile?.role === 'admin' && (
+        {isAdmin && (
           <Link
             href="/admin"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-semibold uppercase tracking-wider transition-all shadow-[0_0_15px_rgba(6,182,212,0.3)]"

@@ -112,8 +112,32 @@ function LoginFormContent() {
         </Button>
       </form>
 
+      {/* Demo Credentials Quick-Fill Helper */}
+      <div className="mt-6 p-4 rounded-2xl bg-cyan-950/30 border border-cyan-800/40 text-xs">
+        <div className="flex items-center justify-between mb-2">
+          <span className="font-mono font-bold text-cyan-300 uppercase tracking-wider text-[11px] flex items-center gap-1.5">
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+            Admin Demo Credentials
+          </span>
+          <button
+            type="button"
+            onClick={() => {
+              setEmail('admin@crimsonghoul.io');
+              setPassword('AdminPassword2026!');
+            }}
+            className="px-2.5 py-1 rounded-lg bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-300 font-mono text-[10px] font-semibold transition-colors border border-cyan-500/40"
+          >
+            Auto-Fill Admin
+          </button>
+        </div>
+        <div className="font-mono text-[11px] space-y-0.5 text-slate-300">
+          <div><span className="text-slate-400">Email:</span> admin@crimsonghoul.io</div>
+          <div><span className="text-slate-400">Password:</span> AdminPassword2026!</div>
+        </div>
+      </div>
+
       {/* Footer Link */}
-      <div className="mt-8 pt-6 border-t border-slate-800 text-center text-xs text-slate-400">
+      <div className="mt-6 pt-6 border-t border-slate-800 text-center text-xs text-slate-400">
         Need an operative account?{' '}
         <Link href={`/register?next=${encodeURIComponent(next)}`} className="text-rose-400 hover:text-rose-300 font-semibold transition-colors">
           Register Here
