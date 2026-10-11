@@ -11,10 +11,19 @@ export interface CloudinaryAsset {
 
 export const STORE_ASSETS = assetsData as Record<string, CloudinaryAsset>;
 
+const FALLBACK_ASSET: CloudinaryAsset = {
+  id: 'fallback',
+  publicId: 'crimson_ghoul_store/fallback',
+  url: '/window.svg',
+  width: 1024,
+  height: 1024,
+  format: 'svg',
+};
+
 /**
  * Helper to get a Cloudinary asset by its unique key.
  */
-export function getStoreAsset(key: keyof typeof STORE_ASSETS): CloudinaryAsset {
-  return STORE_ASSETS[key];
+export function getStoreAsset(key: string): CloudinaryAsset {
+  return STORE_ASSETS[key] || FALLBACK_ASSET;
 }
 

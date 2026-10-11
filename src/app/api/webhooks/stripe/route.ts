@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { stripe } from '@/lib/stripe';
+import { createAdminClient } from '@/lib/supabase/admin';
 import Stripe from 'stripe';
 
 export async function POST(req: Request) {
@@ -41,7 +42,82 @@ export async function POST(req: Request) {
     case 'checkout.session.completed': {
       const session = event.data.object as Stripe.Checkout.Session;
       console.log('Payment succeeded for session:', session.id);
-      // TODO: Fulfill order, update database, send confirmation email
+
+      const metadata = session.metadata || {};
+      const userId = metadata.userId || null;
+      let items: { id: string; quantity: number; price: number }[] = [];
+      let shipping: Record<string, unknown> = {};
+
+      try {
+        if (metadata.items) items = JSON.parse(metadata.items);
+        if (metadata.shipping) shipping = JSON.parse(metadata.shipping);
+      } catch (parseErr) {
+        console.error('Error parsing session metadata:', parseErr);
+      }
+
+      const totalAmount = (session.amount_total ?? 0) / 100;
+      const currency = session.currency || 'usd';
+      const paymentIntentId =
+        typeof session.payment_intent === 'string' ? session.payment_intent : null;
+
+      try {
+        const supabase = createAdminClient();
+
+        // 1. Insert Order Record
+        const { data: orderData, error: orderError } = await supabase
+          .from('orders')
+          .insert({
+            user_id: userId || null,
+            status: 'processing',
+            total_amount: totalAmount,
+            currency: currency,
+            stripe_payment_intent_id: paymentIntentId,
+            stripe_session_id: session.id,
+            shipping_details: shipping,
+          })
+          .select('id')
+          .single();
+
+        if (orderError) {
+          console.error('Failed to insert order into Supabase:', orderError);
+        } else if (orderData && items.length > 0) {
+          // 2. Insert Order Items
+          const orderItems = items.map((item) => ({
+            order_id: orderData.id,
+            product_id: item.id,
+            quantity: item.quantity,
+            unit_price: item.price,
+          }));
+
+          const { error: itemsError } = await supabase
+            .from('order_items')
+            .insert(orderItems);
+
+          if (itemsError) {
+            console.error('Failed to insert order items:', itemsError);
+          }
+
+          // 3. Decrement Inventory for Purchased Units
+          for (const item of items) {
+            const { data: inv } = await supabase
+              .from('inventory')
+              .select('stock_quantity')
+              .eq('product_id', item.id)
+              .single();
+
+            if (inv) {
+              const newStock = Math.max(0, inv.stock_quantity - item.quantity);
+              await supabase
+                .from('inventory')
+                .update({ stock_quantity: newStock, updated_at: new Date().toISOString() })
+                .eq('product_id', item.id);
+            }
+          }
+        }
+      } catch (dbErr) {
+        console.error('Database fulfillment error during webhook handling:', dbErr);
+      }
+
       break;
     }
     case 'payment_intent.succeeded': {

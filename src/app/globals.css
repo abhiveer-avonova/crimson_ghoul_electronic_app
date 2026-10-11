@@ -2,8 +2,20 @@
 @config "../../tailwind.config.ts";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg-app: #0b0f17;
+  --bg-card: #111827;
+  --bg-card-hover: #1e293b;
+  --border-subtle: #1f293d;
+  --border-focus: #e11d48;
+  --crimson-primary: #e11d48;
+  --crimson-hover: #be123c;
+  --crimson-glow: rgba(225, 29, 72, 0.35);
+  --ruby-accent: #f43f5e;
+  --cyber-cyan: #06b6d4;
+  --emerald-stock: #10b981;
+
+  --background: #0b0f17;
+  --foreground: #f8fafc;
 }
 
 @theme inline {
@@ -13,15 +25,9 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
 }
